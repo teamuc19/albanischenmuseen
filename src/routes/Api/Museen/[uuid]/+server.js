@@ -6,14 +6,7 @@ const PASSWORD = 'Svelte';
 
 // Endpoint to handle requests for an individual museum
 export async function GET({ params }) {
-    const authHeader = this.headers.get('authorization');
-    if (!authHeader || !isValidCredentials(authHeader)) {
-        return new Response('Unauthorized', {
-            status: 401,
-            headers: { 'WWW-Authenticate': 'Basic realm="Secure Area"' }
-        });
-    }
-
+ 
     const connection = await createConnection();
     const [rows] = await connection.execute(
         'SELECT * FROM museums WHERE id = ?',
